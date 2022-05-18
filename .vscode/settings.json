@@ -4,4 +4,7 @@
   "restructuredtext.syntaxHighlighting.disabled": true,
   "esbonio.server.enabled": false,
   "esbonio.sphinx.confDir": "",
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "file:///.github/workflows/deploy.yml"
+  },
 }
