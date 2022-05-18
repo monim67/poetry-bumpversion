@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "poetry-bumpversion"
+version = "0.1.0"
+description = "Poetry plugin to update project version strings on poetry version command"
+authors = ["Abdul Monim <abdul.monim@graaho.com>"]
+readme = "README.rst"
+packages = [{ include = "poetry_bumpversion" }]
+repository = "https://github.com/monim67/poetry-bumpversion"
+license = "MIT"
+keywords = ["poetry", "bump", "version", "plugin"]
+
+[tool.poetry.dependencies]
+python = "^3.6.2"
+poetry = "^1.2.0a1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.3.0"
+docutils = "^0.18.1" # RST Preview
+Pygments = "^2.12.0" # RST Preview
+
+[tool.poetry.plugins."poetry.application.plugin"]
+poetry_bumpversion = "poetry_bumpversion.plugin:BumpVersionPlugin"
+
+[tool.poetry_bumpversion.file."poetry_bumpversion/__init__.py"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,7 @@
+{
+  "python.formatting.provider": "black",
+  "editor.formatOnSave": true,
+  "restructuredtext.syntaxHighlighting.disabled": true,
+  "esbonio.server.enabled": false,
+  "esbonio.sphinx.confDir": "",
+}
