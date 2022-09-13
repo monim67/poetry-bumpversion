@@ -10,8 +10,8 @@ license = "MIT"
 keywords = ["poetry", "bump", "version", "plugin"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
-poetry = "^1.2.0a1"
+python = "^3.8"
+poetry = "^1.2.0"
 
 [tool.poetry.group.build.dependencies]
 black = "^22.3.0"
