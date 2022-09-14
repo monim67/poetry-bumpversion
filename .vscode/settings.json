@@ -1,6 +1,13 @@
 {
   "python.formatting.provider": "black",
-  "editor.formatOnSave": true,
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+    }
+  },
   "restructuredtext.syntaxHighlighting.disabled": true,
   "esbonio.server.enabled": false,
   "esbonio.sphinx.confDir": "",
