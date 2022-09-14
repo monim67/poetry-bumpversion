@@ -2,7 +2,7 @@
 name = "poetry-bumpversion"
 version = "0.0.0"
 description = "Poetry plugin to update project version strings on poetry version command"
-authors = ["Abdul Monim <abdul.monim@graaho.com>"]
+authors = ["Munim Munna <6266677+monim67@users.noreply.github.com>"]
 readme = "README.rst"
 packages = [{ include = "poetry_bumpversion" }]
 repository = "https://github.com/monim67/poetry-bumpversion"
@@ -15,6 +15,7 @@ poetry = "^1.2.0a1"
 
 [tool.poetry.group.build.dependencies]
 black = "^22.3.0"
+isort = "^5.10.1"
 pytest = "^7.1.3"
 rstcheck = "^6.0.0.post1"
 poethepoet = "^0.15.0"
@@ -46,17 +47,17 @@ isolated_build = True
 envlist = py{310,39,38,37}
 
 [testenv]
+whitelist_externals = poetry
+skip_install = true
 commands =
-    poe lint
-    pytest
-allowlist_externals =
-    poe
-    pytest
+    poetry install --only main,build
+    poetry run poe lint
+    poetry run pytest
 """
 
-[tool.poe.tasks.lint]
-shell = """
-  python -m black --check poetry_bumpversion tests
-  python -m isort --check-only poetry_bumpversion tests
-  rstcheck --report-level warning *.rst
-  """
+[tool.poe.tasks]
+lint = [
+    { cmd = "python -m black --check poetry_bumpversion tests" },
+    { cmd = "python -m isort --check-only poetry_bumpversion tests" },
+    { cmd = "rstcheck --report-level warning *.rst" },
+]
