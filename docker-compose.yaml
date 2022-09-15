@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  poetry-container:
+    build:
+      args:
+        DEPLOYMENT_ENV: dev
+      context: .
+      dockerfile: Dockerfile
+    image: captainnemo/poetry-container
+    container_name: poetry-container
+    working_dir: /opt/working
+    volumes:
+      - .:/opt/working
+    command: tail -F anything

@@ -16,13 +16,8 @@ RUN pip install "poetry==$POETRY_VERSION"
 
 # Copy only requirements to cache them in docker layer
 WORKDIR /opt/working
-# COPY poetry.lock pyproject.toml /opt/working/
 COPY pyproject.toml /opt/working/
 
 # Project initialization:
 RUN poetry config virtualenvs.create false \
-    && /bin/bash -c "if [ $DEPLOYMENT_ENV = production ] ; then poetry install --no-dev --no-interaction --no-ansi ; else poetry install --no-interaction --no-ansi ; fi"
-#   && poetry install $(test "$YOUR_ENV" == production && echo "--no-dev") --no-interaction --no-ansi
-
-# Creating folders, and files for a project:
-# COPY . /code
+    && /bin/bash -c "if [[ ${DEPLOYMENT_ENV} = prod ]] ; then poetry install --no-dev --no-interaction --no-ansi --no-root ; else poetry install --no-interaction --no-ansi --no-root ; fi"
