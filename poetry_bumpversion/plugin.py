@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any, Dict, Optional
 
 from cleo.commands.command import Command
 from cleo.events.console_command_event import ConsoleCommandEvent
@@ -9,12 +10,10 @@ from poetry.plugins.application_plugin import ApplicationPlugin
 
 
 class BumpVersionPlugin(ApplicationPlugin):
-    def activate(self, application: Application):
+    def activate(self, application: Application) -> None:
         application.event_dispatcher.add_listener(TERMINATE, self.on_terminate)
 
-    def on_terminate(
-        self, event: ConsoleCommandEvent, event_name: str, dispatcher: EventDispatcher
-    ) -> None:
+    def on_terminate(self, event: ConsoleCommandEvent, event_name: str, dispatcher: EventDispatcher) -> None:
         command = event.command
         if command.name == "version" and command.argument("version"):
             handle_version_update(command)
@@ -27,13 +26,9 @@ def handle_version_update(command: Command):
     config = content["tool"].get("poetry_bumpversion", {})
     for replacement in config.get("replacements", []):
         for file_path in replacement.get("files", []):
-            update_version_in_file(
-                command, file_path, replacement, current_version, new_version
-            )
+            update_version_in_file(command, file_path, replacement, current_version, new_version)
     for file_path, instruction in config.get("file", {}).items():
-        update_version_in_file(
-            command, file_path, instruction, current_version, new_version
-        )
+        update_version_in_file(command, file_path, instruction, current_version, new_version)
 
 
 def update_version_in_file(
@@ -50,12 +45,8 @@ def update_version_in_file(
 
     content = file.read_text()
     new_content = content.replace(
-        instruction.get("search", "{current_version}").replace(
-            "{current_version}", current_version
-        ),
-        instruction.get("replace", "{new_version}").replace(
-            "{new_version}", new_version
-        ),
+        instruction.get("search", "{current_version}").replace("{current_version}", current_version),
+        instruction.get("replace", "{new_version}").replace("{new_version}", new_version),
     )
     if new_content == content:
         command.line(f"file {file}: nothing to update!")
