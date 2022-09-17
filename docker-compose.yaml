@@ -3,8 +3,6 @@ version: "3.7"
 services:
   poetry-container:
     build:
-      args:
-        DEPLOYMENT_ENV: dev
       context: .
       dockerfile: Dockerfile
     image: captainnemo/poetry-container
@@ -12,4 +10,10 @@ services:
     working_dir: /opt/working
     volumes:
       - .:/opt/working
-    command: tail -F anything
+    command:
+      - /bin/bash
+      - -c
+      - |
+        poetry config virtualenvs.create false
+        poetry install
+        tail -F anything
