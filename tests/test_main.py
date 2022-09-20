@@ -23,7 +23,9 @@ def copy_project(project_name: str, destination_dir: Path) -> Path:
     return shutil.copytree(package_path, destination_dir / "project")
 
 
-def execute_update_version_command(project_dir: Path, new_version: str) -> subprocess.CompletedProcess:
+def execute_update_version_command(
+    project_dir: Path, new_version: str
+) -> subprocess.CompletedProcess:
     """Executing poetry version update and running coverage to keep track of source
        code coverage.
 
@@ -67,7 +69,9 @@ def test_project_with_file_not_found(tmp_path: Path) -> None:
     """
     new_version: str = "1.0.0"
     project_dir: Path = copy_project("project_file_not_found", tmp_path)
-    result: subprocess.CompletedProcess = execute_update_version_command(project_dir, new_version)
+    result: subprocess.CompletedProcess = execute_update_version_command(
+        project_dir, new_version
+    )
     assert "not found" in result.stdout
 
 
@@ -80,7 +84,9 @@ def test_project_with_nothing_to_update(tmp_path: Path) -> None:
     """
     new_version: str = "0.1.0"
     project_dir: Path = copy_project("project_with_nothing_to_update", tmp_path)
-    result: subprocess.CompletedProcess = execute_update_version_command(project_dir, new_version)
+    result: subprocess.CompletedProcess = execute_update_version_command(
+        project_dir, new_version
+    )
     assert "nothing to update" in result.stdout
 
 
@@ -92,7 +98,9 @@ def test_project_with_instructions(tmp_path: Path) -> None:
     """
     new_version: str = "1.0.0"
     project_dir: Path = copy_project("project_with_instructions", tmp_path)
-    result: subprocess.CompletedProcess = execute_update_version_command(project_dir, new_version)
+    result: subprocess.CompletedProcess = execute_update_version_command(
+        project_dir, new_version
+    )
     assert new_version in result.stdout
     for file in (
         project_dir / "test_package/__init__.py",
@@ -110,7 +118,9 @@ def test_project_with_replacements(tmp_path: Path) -> None:
     """
     new_version: str = "1.0.0"
     project_dir: Path = copy_project("project_with_replacements", tmp_path)
-    result: subprocess.CompletedProcess = execute_update_version_command(project_dir, new_version)
+    result: subprocess.CompletedProcess = execute_update_version_command(
+        project_dir, new_version
+    )
     assert new_version in result.stdout
     for file in (
         project_dir / "test_package/__init__.py",
