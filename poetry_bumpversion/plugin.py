@@ -9,18 +9,38 @@ from poetry.plugins.application_plugin import ApplicationPlugin
 
 
 class BumpVersionPlugin(ApplicationPlugin):
-    def activate(self, application: Application):
+    """Bump version plugin class"""
+
+    def activate(self, application: Application) -> None:
+        """The activate method of the plugin.
+
+        Args:
+            application (Application): The poetry application hook/argument.
+        """
         application.event_dispatcher.add_listener(TERMINATE, self.on_terminate)
 
     def on_terminate(
         self, event: ConsoleCommandEvent, event_name: str, dispatcher: EventDispatcher
     ) -> None:
+        """Plugin on terminate hook/function.
+
+        Args:
+            event (ConsoleCommandEvent): Console event hook.
+            event_name (str): Event name.
+            dispatcher (EventDispatcher): Event dispatcher.
+        """
         command = event.command
         if command.name == "version" and command.argument("version"):
             handle_version_update(command)
 
 
-def handle_version_update(command: Command):
+def handle_version_update(command: Command) -> None:
+    """Handling version updates using both file and replacement
+       version updating
+
+    Args:
+        command (Command): Executed command.
+    """
     content = command.poetry.file.read()
     current_version = command.poetry.package.pretty_version
     new_version = content["tool"]["poetry"]["version"]
@@ -42,7 +62,17 @@ def update_version_in_file(
     instruction: dict,
     current_version: str,
     new_version: str,
-):
+) -> None:
+    """Function for updating the version in file.
+
+    Args:
+        command (Command): Executed command.
+        file_path (str): Path to file containing the version to be updated.
+        instruction (dict): Instruction to search for desired version in file
+        and replace it.
+        current_version (str): The current version in file to be changed.
+        new_version (str): The new version to change the current version with.
+    """
     file = Path(file_path)
     if not file.exists():
         command.line(f"file {file} not found!")
