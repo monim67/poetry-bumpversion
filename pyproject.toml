@@ -11,7 +11,7 @@ keywords = ["poetry", "bump", "version", "plugin"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-poetry = "^1.2.1"
+poetry = "^1.2.0a1"
 
 [tool.poetry.group.build.dependencies]
 black = "^22.3.0"
