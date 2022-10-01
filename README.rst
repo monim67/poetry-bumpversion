@@ -6,7 +6,7 @@ The ``poetry version`` command only updates version in ``pyproject.toml`` file.
 This plugin updates version in other files when ``poetry version <version>``
 command is executed.
 
-|  |build-status| |pyversions| |pypi-version| |license|
+|  |build-status| |coverage.io| |pyversions| |pypi-version| |license|
 
 ********************
 Getting Started
@@ -16,7 +16,7 @@ Getting Started
 Prerequisites
 ++++++++++++++++++++
 
-- poetry = ^1.2.0a1
+- poetry = ^1.2.0a2
 
 ++++++++++++++++++++
 Install
@@ -44,12 +44,24 @@ Add the following to your ``pyproject.toml`` file.
 .. code:: toml
 
     [tool.poetry_bumpversion.file."your_package/__init__.py"]
+    # Duplicate the line above to add more files
 
-Now run ``poetry version patch`` to check if version in both ``pyproject.toml`` and
-``your_package/__init__.py`` file has been updated.
+Now run ``poetry version patch --dry-run``, if your output looks somewhat like below
+you are all set (dry-run does not update any file).
 
-You can add more files following the steps above. You can also fine define
-search and replace terms to be more precise
+::
+
+    Bumping version from 0.5.0 to 0.5.1
+    poetry-bumpversion: processed file: your_package/__init__.py
+
+If dry-run output looks fine you can run version update command without dry-run flag to
+check if version in both ``pyproject.toml`` and ``your_package/__init__.py`` file has been updated.
+
+********************
+Advanced Usage
+********************
+
+You can define search and replace terms to be more precise
 
 .. code:: toml
 
@@ -57,7 +69,8 @@ search and replace terms to be more precise
     search = '__version__ = "{current_version}"'
     replace = '__version__ = "{new_version}"'
 
-You can also define replacements if you have same search/replace patterns across multiple files.
+You can define replacements if you have same search/replace patterns
+across multiple files.
 
 .. code:: toml
 
@@ -83,6 +96,11 @@ This project is licensed under MIT License - see the
 .. |build-status| image:: https://github.com/monim67/poetry-bumpversion/actions/workflows/build.yml/badge.svg?event=push
     :target: https://github.com/monim67/poetry-bumpversion/actions/workflows/build.yml
     :alt: Build Status
+    :height: 20px
+
+.. |coverage.io| image:: https://coveralls.io/repos/github/monim67/poetry-bumpversion/badge.svg?branch=master
+    :target: https://coveralls.io/github/monim67/poetry-bumpversion?branch=master
+    :alt: Coverage Status
     :height: 20px
 
 .. |pyversions| image:: https://img.shields.io/pypi/pyversions/poetry-bumpversion.svg

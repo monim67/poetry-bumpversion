@@ -1,10 +1,13 @@
 {
   "python.formatting.provider": "black",
+  "python.linting.mypyEnabled": true,
+  "python.linting.pydocstyleEnabled": true,
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": false,
   "[python]": {
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
+      "source.fixAll": true,
       "source.organizeImports": true,
     }
   },

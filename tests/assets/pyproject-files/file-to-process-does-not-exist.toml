@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "sample-package"
+version = "0.0.0"
+description = ""
+authors = []
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry_bumpversion.file."sample_package/file_does_not_exist.py"]

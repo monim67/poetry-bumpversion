@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "sample-package"
+version = "0.0.0"
+description = ""
+authors = []
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry_bumpversion.replacements]]
+files = ["sample_package/__init__.py", "sample_package/_version.py"]
+search = '__version__ = "{current_version}"'
+replace = '__version__ = "{new_version}"'
+
+[[tool.poetry_bumpversion.replacements]]
+files = ["README.md"]
+search = 'version: {current_version}'
+replace = 'version: {new_version}'

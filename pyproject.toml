@@ -1,26 +1,31 @@
 [tool.poetry]
 name = "poetry-bumpversion"
 version = "0.0.0"
-description = "Poetry plugin to update project version strings on poetry version command"
+description = "Poetry plugin to update __version__ in __init__ file and other files containing version strings"
 authors = ["Munim Munna <6266677+monim67@users.noreply.github.com>"]
 readme = "README.rst"
-packages = [{ include = "poetry_bumpversion" }]
+packages = [{ include = "*", from = "src" }]
 repository = "https://github.com/monim67/poetry-bumpversion"
 license = "MIT"
 keywords = ["poetry", "bump", "version", "plugin"]
+classifiers = ["Typing :: Typed"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
 poetry = "^1.2.0a2"
+typing-extensions = "*"
+pydantic = "*"
 
 [tool.poetry.group.build.dependencies]
 black = "^22.3.0"
 isort = "^5.10.1"
+mypy = "^0.971"
+pydocstyle = {extras = ["toml"], version = "^6.1.1"}
 pytest = "^7.1.3"
-interrogate = "^1.5.0"
 rstcheck = "^6.0.0.post1"
 poethepoet = "^0.15.0"
-coverage = {extras = ["toml"], version = "^6.4.4"}
+coverage = { extras = ["toml"], version = "^6.4.4" }
+pre-commit = "^2.20.0"
 
 [tool.poetry.group.dev.dependencies]
 tox = "^3.24.5"
@@ -30,15 +35,37 @@ Pygments = "^2.12.0" # RST Preview
 [tool.poetry.plugins."poetry.application.plugin"]
 poetry_bumpversion = "poetry_bumpversion.plugin:BumpVersionPlugin"
 
+[tool.poetry_bumpversion.file."src/poetry_bumpversion/__init__.py"]
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.black]
+target_version = ["py37", "py38", "py39", "py310", "py311"]
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+python_version = "3.7"
+namespace_packages = true
+strict = true
+
+[[tool.mypy.overrides]]
+module = "cleo.*"
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
+[tool.pydocstyle]
+convention = "google"
+add_select = "D401,D404"
+
 [tool.coverage.run]
-parallel = true
+command_line = "-m pytest"
+source = ["src"]
 
 [tool.tox]
 legacy_tox_ini = """
@@ -50,38 +77,27 @@ envlist = py{310,39,38,37}
 whitelist_externals = poetry
 skip_install = true
 commands =
-    poetry install --only main,build
-    poetry run poe lint
-    poetry run pytest
+    poetry install --no-root --only build
+    pip install -c tests/pip-constraints.txt .
+    poe lint
+    pytest
 """
-
-[tool.interrogate]
-ignore-init-method = true
-ignore-init-module = true
-ignore-magic = true
-ignore-semiprivate = true
-ignore-private = true
-ignore-property-decorators = true
-ignore-module = true
-fail-under = 100
-exclude = ["src/tests"]
-ignore-regex = ["^test"]
-verbose = 2
-quiet = false
-whitelist-regex = []
-color = true
-generate-badge = "."
-badge-format = "svg"
 
 [tool.poe.tasks]
 lint = [
-    { cmd = "python -m black --check poetry_bumpversion tests" },
-    { cmd = "python -m isort --check-only poetry_bumpversion tests" },
+    { cmd = "python -m black --check src tests" },
+    { cmd = "python -m isort --check-only src tests" },
+    { cmd = "mypy src tests" },
+    { cmd = "pydocstyle src" },
     { cmd = "rstcheck --report-level warning *.rst" },
 ]
 test-cov = [
-    { cmd = "coverage run --source=poetry_bumpversion,tests -m pytest" },
+    { cmd = "coverage run" },
     { cmd = "coverage combine" },
-    { cmd = "coverage xml" },
+    { cmd = "coverage lcov -o coverage/lcov.info" },
+    { cmd = "coverage report" },
 ]
-docstring-cov = "interrogate ."
+
+[tool.poe.tasks.check-lock]
+shell = "poetry lock --check | grep -v 'not consistent'"
+help = "poetry lock workaround for https://github.com/nat-n/poethepoet/issues/91"
