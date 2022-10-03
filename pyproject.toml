@@ -65,7 +65,14 @@ add_select = "D401,D404"
 
 [tool.coverage.run]
 command_line = "-m pytest"
-source = ["src"]
+source = ["poetry_bumpversion"]
+parallel = true
+
+[tool.coverage.paths]
+source = [
+    "src/poetry_bumpversion",
+    "**/site-packages/poetry_bumpversion",
+]
 
 [tool.tox]
 legacy_tox_ini = """

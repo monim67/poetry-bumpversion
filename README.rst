@@ -98,8 +98,8 @@ This project is licensed under MIT License - see the
     :alt: Build Status
     :height: 20px
 
-.. |coverage.io| image:: https://coveralls.io/repos/github/monim67/poetry-bumpversion/badge.svg?branch=master
-    :target: https://coveralls.io/github/monim67/poetry-bumpversion?branch=master
+.. |coverage.io| image:: https://coveralls.io/repos/github/monim67/poetry-bumpversion/badge.svg
+    :target: https://coveralls.io/github/monim67/poetry-bumpversion
     :alt: Coverage Status
     :height: 20px
 

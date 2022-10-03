@@ -27,6 +27,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          poetry env use ${{ matrix.python-version }}
           poetry install --no-root --only build --no-ansi --no-interaction
           poetry run pip install -c tests/pip-constraints.txt .
 
@@ -62,6 +63,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          poetry env use ${{ matrix.python-version }}
           poetry install --no-root --only build --no-ansi --no-interaction
           poetry run pip install -c tests/pip-constraints.txt .
 

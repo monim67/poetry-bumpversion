@@ -5,8 +5,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
-plugin_source_dir: Path = Path.cwd() / "src"
 testing_assets: Path = Path(__file__).parent / "assets"
+plugin_pyproject_file: Path = Path.cwd() / "pyproject.toml"
 
 
 def copy_project(project_name: str, destination_dir: Path) -> Path:
@@ -39,9 +39,7 @@ def execute_update_version_command(
         [
             "coverage",
             "run",
-            "--source",
-            str(plugin_source_dir),
-            "--parallel-mode",
+            f"--rcfile={plugin_pyproject_file}",
             "-m",
             "poetry",
             "version",
