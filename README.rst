@@ -2,6 +2,8 @@
 poetry-bumpversion
 ####################
 
+| |logo|
+
 The ``poetry version`` command only updates version in ``pyproject.toml`` file.
 This plugin updates version in other files when ``poetry version <version>``
 command is executed.
@@ -92,6 +94,9 @@ License
 This project is licensed under MIT License - see the
 `LICENSE <https://github.com/monim67/poetry-bumpversion/blob/master/LICENSE>`_ file for details.
 
+
+.. |logo| image:: https://github.com/monim67/poetry-bumpversion/blob/main/.github/assets/logo.png?raw=true
+    :alt: Logo
 
 .. |build-status| image:: https://github.com/monim67/poetry-bumpversion/actions/workflows/build.yml/badge.svg?event=push
     :target: https://github.com/monim67/poetry-bumpversion/actions/workflows/build.yml
