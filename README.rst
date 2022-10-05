@@ -86,6 +86,15 @@ across multiple files.
     search = 'version: {current_version}'
     replace = 'version: {new_version}'
 
+******************************
+Usage with Github Workflow
+******************************
+
+This plugin uses itself in it's "Deploy to PyPI" workflow. When a release tag is created on
+GitHub, the workflow updates package version using the release tag name and deploys it to PyPI.
+You can copy the `deploy workflow code`_ to your repository to set it up.
+
+.. _deploy workflow code: https://github.com/monim67/poetry-bumpversion/blob/master/.github/workflows/deploy.yml
 
 ********************
 License
