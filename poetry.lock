@@ -545,7 +545,7 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "poethepoet"
-version = "0.15.0"
+version = "0.16.3"
 description = "A task runner that works well with poetry."
 category = "dev"
 optional = false
@@ -1054,7 +1054,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "551906fd1d86c6632d120e438549d1e701353c07a0acae75429038ad5e34fae0"
+content-hash = "e84e2cb538447ab4f5af03ec0335dace26622e85272d7a97d2cb4591656408e4"
 
 [metadata.files]
 attrs = [
@@ -1493,8 +1493,8 @@ pluggy = [
     {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
 ]
 poethepoet = [
-    {file = "poethepoet-0.15.0-py3-none-any.whl", hash = "sha256:8ca49d8a9928a3ce1753315d6df0866888557eccb0fe37a8c88fea47454cfe12"},
-    {file = "poethepoet-0.15.0.tar.gz", hash = "sha256:5843260c9074b6c42bf2e51f21107efe37e230cf75da3dd3f4b43904f365b26c"},
+    {file = "poethepoet-0.16.3-py3-none-any.whl", hash = "sha256:b33747d659baec0059acb22eb5648f770061a0aad57876fb2a4f3f7939917d81"},
+    {file = "poethepoet-0.16.3.tar.gz", hash = "sha256:750cc15614b99a8594d47611f89ec7db7d07046c00ab7c4a50eefec5a0219a0d"},
 ]
 poetry = [
     {file = "poetry-1.2.1-py3-none-any.whl", hash = "sha256:43be0a7b0fdc3efa661324e288e9630ad00c54dcf17e2a054740a160d7f25d63"},
