@@ -5,6 +5,7 @@ from typing import Iterator, cast
 
 from cleo.events.console_events import TERMINATE
 from cleo.events.console_terminate_event import ConsoleTerminateEvent
+from cleo.events.event import Event
 from cleo.events.event_dispatcher import EventDispatcher
 from poetry.console.application import Application
 from poetry.console.commands.version import VersionCommand
@@ -41,7 +42,7 @@ class BumpVersionPlugin(ApplicationPlugin):
             application.event_dispatcher.add_listener(TERMINATE, self.on_terminate)
 
     def on_terminate(
-        self, event: ConsoleTerminateEvent, event_name: str, dispatcher: EventDispatcher
+        self, event: Event, event_name: str, dispatcher: EventDispatcher
     ) -> None:
         """Plugin on terminate hook/function.
 
@@ -50,6 +51,8 @@ class BumpVersionPlugin(ApplicationPlugin):
             event_name (str): Event name.
             dispatcher (EventDispatcher): Event dispatcher.
         """
+        if not isinstance(event, ConsoleTerminateEvent):
+            return
         try:
             command = event.command
             if command.name == "version" and command.argument("version"):
