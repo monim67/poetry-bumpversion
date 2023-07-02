@@ -17,13 +17,15 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
 
-      - uses: actions/setup-python@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           cache: poetry
 
       - name: Check poetry.lock
-        run: poetry lock --check
+        run: |
+          poetry env use ${{ matrix.python-version }}
+          poetry lock --check
 
       - name: Install dependencies
         run: |
@@ -56,7 +58,7 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
 
-      - uses: actions/setup-python@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           cache: poetry

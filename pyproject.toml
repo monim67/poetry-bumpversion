@@ -4,7 +4,7 @@ version = "0.0.0"
 description = "Poetry plugin to update __version__ in __init__ file and other files containing version strings"
 authors = ["Munim Munna <6266677+monim67@users.noreply.github.com>"]
 readme = "README.rst"
-packages = [{ include = "*", from = "src" }]
+packages = [{ include = "poetry_bumpversion", from = "src" }]
 repository = "https://github.com/monim67/poetry-bumpversion"
 license = "MIT"
 keywords = ["poetry", "bump", "version", "plugin"]
@@ -45,6 +45,7 @@ build-backend = "poetry.core.masonry.api"
 target_version = ["py37", "py38", "py39", "py310", "py311"]
 
 [tool.isort]
+py_version = "37"
 profile = "black"
 
 [tool.mypy]
