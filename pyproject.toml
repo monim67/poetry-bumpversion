@@ -14,7 +14,7 @@ classifiers = ["Typing :: Typed"]
 python = "^3.7"
 poetry = "^1.2.0a2"
 typing-extensions = "*"
-pydantic = "*"
+pydantic = "<2"
 
 [tool.poetry.group.build.dependencies]
 black = "^22.3.0"
