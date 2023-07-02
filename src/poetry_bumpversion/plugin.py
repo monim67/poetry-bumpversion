@@ -51,8 +51,7 @@ class BumpVersionPlugin(ApplicationPlugin):
             event_name (str): Event name.
             dispatcher (EventDispatcher): Event dispatcher.
         """
-        if not isinstance(event, ConsoleTerminateEvent):
-            return
+        assert isinstance(event, ConsoleTerminateEvent)
         try:
             command = event.command
             if command.name == "version" and command.argument("version"):
