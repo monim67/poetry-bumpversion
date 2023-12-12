@@ -17,7 +17,7 @@ jobs:
       - name: Install poetry
         run: |
           pipx install poetry
-          poetry self add .
+          pipx inject poetry .
 
       # NOTE: Instead of above step use the following in your workflow
       # - name: Install poetry
