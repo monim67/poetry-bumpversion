@@ -91,9 +91,11 @@ across multiple files.
 Usage with Github Workflow
 ******************************
 
-This plugin uses itself in it's "Deploy to PyPI" workflow. When a release tag is created on
-GitHub, the workflow updates package version using the release tag name and deploys it to PyPI.
-You can copy the `deploy workflow code`_ to your repository to set it up.
+This plugin can be used to bump version automatically during publishing to PyPI using a GitHub workflow.
+When a release tag is created the workflow will use that tag name e.g ``2.0.1`` to update versions in every
+files, build the package and publish to PyPI. This is how this plugin is deployed to PyPI.
+
+To get started you can copy the `deploy workflow code`_ from this repo to your repo and set it up.
 
 .. _deploy workflow code: https://github.com/monim67/poetry-bumpversion/blob/master/.github/workflows/deploy.yml
 
