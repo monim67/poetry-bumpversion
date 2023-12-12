@@ -11,15 +11,15 @@ keywords = ["poetry", "bump", "version", "plugin"]
 classifiers = ["Typing :: Typed"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
-poetry = "^1.2.0a2"
+python = "^3.8"
+poetry = "^1.2.0"
 typing-extensions = "*"
-pydantic = "<2"
+pydantic = "*"
 
 [tool.poetry.group.build.dependencies]
 black = "^22.3.0"
 isort = "^5.10.1"
-mypy = "^0.971"
+mypy = "^1.7.1"
 pydocstyle = {extras = ["toml"], version = "^6.1.1"}
 pytest = "^7.1.3"
 rstcheck = "^6.0.0.post1"
@@ -42,14 +42,14 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-target_version = ["py37", "py38", "py39", "py310", "py311"]
+target_version = ["py38", "py39", "py310", "py311"]
 
 [tool.isort]
-py_version = "37"
+py_version = "38"
 profile = "black"
 
 [tool.mypy]
-python_version = "3.7"
+python_version = "3.8"
 namespace_packages = true
 strict = true
 
@@ -79,10 +79,12 @@ source = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{310,39,38,37}
+envlist = py{312,311,310,39,38}
 
 [testenv]
-whitelist_externals = poetry
+allowlist_externals =
+    poetry
+    poe
 skip_install = true
 commands =
     poetry install --no-root --only build

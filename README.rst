@@ -18,7 +18,8 @@ Getting Started
 Prerequisites
 ++++++++++++++++++++
 
-- poetry = ^1.2.0a2
+- python = ^3.8
+- poetry = ^1.2.0
 
 ++++++++++++++++++++
 Install

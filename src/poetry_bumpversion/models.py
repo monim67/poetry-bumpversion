@@ -3,7 +3,10 @@
 from pathlib import Path
 from typing import Dict, List
 
-from pydantic import BaseModel
+try:
+    from pydantic.v1 import BaseModel
+except ModuleNotFoundError:  # pragma: no cover
+    from pydantic import BaseModel  # type: ignore
 
 CURRENT_VERSION_MARKER = "{current_version}"
 NEW_VERSION_MARKER = "{new_version}"
