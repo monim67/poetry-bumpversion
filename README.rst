@@ -31,6 +31,12 @@ Install the plugin by poetry plugin command.
 
     poetry self add poetry-bumpversion
 
+If you're using pipx, use this command instead.
+
+::
+
+    pipx inject poetry poetry-bumpversion
+
 ++++++++++++++++++++++++++++++
 Configure version replacements
 ++++++++++++++++++++++++++++++
