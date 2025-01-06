@@ -1,0 +1,25 @@
+{
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"mounts": [
+		{
+			"source": "poetry-cache",
+			"target": "/root/.cache/pypoetry",
+			"type": "volume"
+		}
+	],
+	"postCreateCommand": "make -C .devcontainer post-create",
+	"postStartCommand": "poetry install --sync",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.isort",
+				"ms-python.black-formatter",
+				"ms-python.mypy-type-checker",
+				"mhutchie.git-graph"
+			]
+		}
+	}
+}
