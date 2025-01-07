@@ -11,8 +11,8 @@ keywords = ["poetry", "bump", "version", "plugin"]
 classifiers = ["Typing :: Typed"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-poetry = "^1.2.0"
+python = "^3.9"
+poetry = ">=1.2.0,<3"
 typing-extensions = "*"
 pydantic = "*"
 
@@ -42,19 +42,16 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-target_version = ["py38", "py39", "py310", "py311"]
+target_version = ["py39", "py310", "py311"]
 
 [tool.isort]
-py_version = "38"
+py_version = "39"
 profile = "black"
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.9"
 namespace_packages = true
 strict = true
-
-[[tool.mypy.overrides]]
-module = "cleo.*"
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
@@ -79,7 +76,7 @@ source = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311,310,39,38}
+envlist = py{312,311,310,39}
 
 [testenv]
 allowlist_externals =

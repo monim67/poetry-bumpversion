@@ -18,7 +18,7 @@ Getting Started
 Prerequisites
 ++++++++++++++++++++
 
-- python = ^3.8
+- python = ^3.9
 - poetry = ^1.2.0
 
 ++++++++++++++++++++
