@@ -10,7 +10,7 @@
 		}
 	],
 	"postCreateCommand": "make -C .devcontainer post-create",
-	"postStartCommand": "poetry install --sync",
+	"postStartCommand": "poetry sync",
 	"customizations": {
 		"vscode": {
 			"extensions": [

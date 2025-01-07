@@ -1,6 +1,6 @@
 FROM python:3.12
 
-RUN pip install "poetry>=1.2"
+RUN pip install "poetry>=2.0"
 
 RUN curl -fsSL https://pyenv.run | bash
 ENV PYENV_ROOT="/root/.pyenv" PATH="/root/.pyenv/bin:$PATH:/root/.pyenv/shims"
