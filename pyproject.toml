@@ -2,9 +2,9 @@
 name = "poetry-bumpversion"
 version = "0.0.0"
 description = "Poetry plugin to update __version__ in __init__ file and other files containing version strings"
-authors = [{name = "Abdul Monim",email = "6266677+monim67@users.noreply.github.com"}]
+authors = [{name = "Abdul Monim"}]
 readme = "README.rst"
-requires-python = ">=3.9,<4"
+requires-python = ">=3.10,<4"
 repository = "https://github.com/monim67/poetry-bumpversion"
 license = "MIT"
 keywords = ["poetry", "bump", "version", "plugin"]
@@ -20,7 +20,7 @@ requires-poetry = ">=2.0"
 packages = [{ include = "poetry_bumpversion", from = "src" }]
 
 [tool.poetry.group.build.dependencies]
-black = "^22.3.0"
+black = "^25.0.0"
 isort = "^5.10.1"
 mypy = "^1.7.1"
 pydocstyle = {extras = ["toml"], version = "^6.1.1"}
@@ -45,14 +45,14 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-target_version = ["py39", "py310", "py311"]
+target_version = ["py310", "py311", "py312", "py313", "py314"]
 
 [tool.isort]
-py_version = "39"
+py_version = "310"
 profile = "black"
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
 namespace_packages = true
 strict = true
 ignore_missing_imports = true
@@ -79,7 +79,7 @@ source = [
 legacy_tox_ini = """
 [tox]
 isolated_build = True
-envlist = py{312,311,310,39}
+envlist = py{314,313,312,311,310}
 
 [testenv]
 allowlist_externals =
@@ -87,6 +87,7 @@ allowlist_externals =
     poe
 skip_install = true
 commands =
+    pip install --upgrade poetry
     poetry install --no-root --only build
     pip install -c tests/pip-constraints.txt .
     poe lint
