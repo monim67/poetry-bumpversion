@@ -31,7 +31,7 @@ coverage = { extras = ["toml"], version = "^6.4.4" }
 pre-commit = "^2.20.0"
 
 [tool.poetry.group.dev.dependencies]
-tox = "^3.24.5"
+tox = "^4.61.1"
 docutils = "^0.18.1" # RST Preview
 Pygments = "^2.12.0" # RST Preview
 
@@ -78,19 +78,15 @@ source = [
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-isolated_build = True
 envlist = py{314,313,312,311,310}
 
 [testenv]
 allowlist_externals =
-    poetry
-    poe
+    bash
 skip_install = true
+extra_setup_commands =
+    bash tests/install-tox-deps.bash
 commands =
-    pip install --upgrade poetry
-    poetry install --no-root --only build
-    pip install -c tests/pip-constraints.txt .
-    poe lint
     pytest
 """
 
