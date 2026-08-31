@@ -24,7 +24,10 @@ def copy_project(project_name: str, destination_dir: Path) -> Path:
 
 
 def execute_update_version_command(
-    project_dir: Path, new_version: str, cwd: Path | None = None
+    project_dir: Path,
+    new_version: str,
+    cwd: Path | None = None,
+    extra_args: list[str] | None = None,
 ) -> "subprocess.CompletedProcess[str]":
     """Execute poetry version update command with coverage to track code coverage.
 
@@ -33,6 +36,8 @@ def execute_update_version_command(
         new_version (str): The new version to update the test package version to.
         cwd (Path | None): Working directory for the command. Defaults to project_dir.
             When provided, uses the poetry --directory flag to point at project_dir.
+        extra_args (list[str] | None): Additional CLI arguments appended after the
+            version argument (e.g. ["--next-phase"]).
 
     Returns:
         subprocess.CompletedProcess: The subprocess outcome object.
@@ -48,6 +53,8 @@ def execute_update_version_command(
     if cwd is not None:
         base_cmd += ["--directory", str(project_dir)]
     base_cmd += ["version", new_version]
+    if extra_args:
+        base_cmd += extra_args
     result = subprocess.run(
         base_cmd,
         cwd=run_from,
@@ -206,3 +213,34 @@ def test_project_with_replacements_using_directory_flag(tmp_path: Path) -> None:
         project_dir / "README.md",
     ):
         assert new_version in file.read_text()
+
+
+def test_next_phase_flag_is_forwarded(tmp_path: Path) -> None:
+    """Tracked files must receive the --next-phase result, not a plain prerelease bump.
+
+    Reproduces issue #18 where poetry version prerelease --next-phase advanced
+    pyproject.toml to the next phase (e.g. 3.0.0b0) but the plugin rewrote
+    tracked files with the plain prerelease result (3.0.0a1) because the
+    --next-phase option was not forwarded to increment_version.
+
+    Args:
+        tmp_path (Path): tmp_path fixture provided by pytest.
+    """
+    project_dir: Path = copy_project("sample-project", tmp_path)
+    shutil.copyfile(
+        testing_assets / "pyproject-files/valid-instructions.toml",
+        project_dir / "pyproject.toml",
+    )
+    # Establish a prerelease starting state
+    execute_update_version_command(project_dir, "3.0.0a0")
+    # Advance to the next prerelease phase
+    result = execute_update_version_command(
+        project_dir, "prerelease", extra_args=["--next-phase"]
+    )
+    expected_version: str = "3.0.0b0"
+    assert expected_version in result.stdout
+    for file in (
+        project_dir / "sample_package/__init__.py",
+        project_dir / "sample_package/_version.py",
+    ):
+        assert expected_version in file.read_text()
