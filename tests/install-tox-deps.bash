@@ -4,7 +4,7 @@ set -e
 
 install() {
     poetry install --no-root --only build
-    pip install -c tests/pip-constraints.txt .
+    pip install -c tests/pip-constraints.txt -e .
 }
 
 install_if_deps_updated() {
@@ -36,4 +36,4 @@ validate_which_poetry_resolves_to_tox_env() {
 
 validate_poetry_honoring_virtualenvs
 validate_which_poetry_resolves_to_tox_env
-# install_if_deps_updated
+install_if_deps_updated
