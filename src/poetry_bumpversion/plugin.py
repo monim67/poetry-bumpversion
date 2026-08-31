@@ -11,11 +11,7 @@ from poetry.console.application import Application
 from poetry.console.commands.version import VersionCommand
 from poetry.core.pyproject.toml import PyProjectTOML
 from poetry.plugins.application_plugin import ApplicationPlugin
-
-try:
-    from pydantic.v1 import ValidationError
-except ModuleNotFoundError:  # pragma: no cover
-    from pydantic import ValidationError  # type: ignore
+from pydantic import ValidationError
 
 from .models import (
     CURRENT_VERSION_MARKER,

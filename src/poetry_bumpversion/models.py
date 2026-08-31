@@ -1,12 +1,8 @@
 """Pydantic models for the Plugin."""
 
 from pathlib import Path
-from typing import Dict, List
 
-try:
-    from pydantic.v1 import BaseModel
-except ModuleNotFoundError:  # pragma: no cover
-    from pydantic import BaseModel  # type: ignore
+from pydantic import BaseModel
 
 CURRENT_VERSION_MARKER = "{current_version}"
 NEW_VERSION_MARKER = "{new_version}"
@@ -30,14 +26,14 @@ class FileConfig(BaseModel):
 class ReplacementConfig(FileConfig):
     """Pydantic model for Replacement config."""
 
-    files: List[str] = []
+    files: list[str] = []
 
 
 class PluginConfig(BaseModel):
     """Pydantic model for plugin configuration extracted from pyproject.toml file."""
 
-    file: Dict[str, FileConfig] = {}
-    replacements: List[ReplacementConfig] = []
+    file: dict[str, FileConfig] = {}
+    replacements: list[ReplacementConfig] = []
 
 
 class ToolConfig(BaseModel):
