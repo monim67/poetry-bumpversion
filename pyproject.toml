@@ -10,7 +10,7 @@ license = "MIT"
 keywords = ["poetry", "bump", "version", "plugin"]
 classifiers = ["Typing :: Typed"]
 dependencies = [
-    "poetry>=1.2.0,<3",
+    "poetry>=2",
     "typing-extensions",
     "pydantic"
 ]

@@ -19,7 +19,7 @@ Prerequisites
 ++++++++++++++++++++
 
 - python = ^3.10
-- poetry = ^1.2.0
+- poetry = ^2.0
 
 ++++++++++++++++++++
 Install

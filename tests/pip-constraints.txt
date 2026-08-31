@@ -1,1 +1,5 @@
-poetry>=2.0 ; python_version >= "3.9"
+poetry>=2.4 ; python_version >= "3.14"
+poetry>=2.3,<2.4 ; python_version >= "3.13" and python_version < "3.14"
+poetry>=2.2,<2.3 ; python_version >= "3.12" and python_version < "3.13"
+poetry>=2.1,<2.2 ; python_version >= "3.11" and python_version < "3.12"
+poetry>=2.0,<2.1 ; python_version >= "3.10" and python_version < "3.11"
