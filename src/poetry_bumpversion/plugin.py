@@ -83,7 +83,9 @@ def handle_version_update(command: VersionCommand) -> None:
     pyproject = command.poetry.pyproject
     current_version = command.poetry.package.pretty_version
     version_arg = command.argument("version")
-    new_version = command.increment_version(current_version, version_arg).text
+    new_version = command.increment_version(
+        current_version, version_arg, command.option("next-phase")
+    ).text
     if new_version == current_version:
         raise PluginException("no change in version detected")
 
