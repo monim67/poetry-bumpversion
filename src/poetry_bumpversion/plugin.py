@@ -58,7 +58,11 @@ class BumpVersionPlugin(ApplicationPlugin):
         assert isinstance(event, ConsoleTerminateEvent)
         try:
             command = event.command
-            if command.name == "version" and command.argument("version"):
+            if (
+                event.exit_code == 0
+                and command.name == "version"
+                and command.argument("version")
+            ):
                 handle_version_update(cast(VersionCommand, command))
         except (PluginException, ValidationError) as exc:
             command.line(_(str(exc)), "warning")
