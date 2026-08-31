@@ -113,16 +113,17 @@ def read_instructions(pyproject: PyProjectTOML) -> Iterator[Instruction]:
         pydantic.ValidationError: when plugin config is invalid
     """
     plugin_config = PyProjectData(**pyproject.data).tool.poetry_bumpversion
+    project_dir = pyproject.path.parent
     for replacement_config in plugin_config.replacements:
         for file_path in replacement_config.files:
             yield Instruction(
-                file=Path(file_path),
+                file=project_dir / file_path,
                 search_pattern=replacement_config.search,
                 replace_pattern=replacement_config.replace,
             )
     for file_path, file_config in plugin_config.file.items():
         yield Instruction(
-            file=Path(file_path),
+            file=project_dir / file_path,
             search_pattern=file_config.search,
             replace_pattern=file_config.replace,
         )
