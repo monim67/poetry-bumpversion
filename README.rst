@@ -25,11 +25,24 @@ Prerequisites
 Install
 ++++++++++++++++++++
 
-Install the plugin by poetry plugin command.
+**Option 1 — Install globally.** Available to all projects on the machine; each developer must run this once.
 
 ::
 
     poetry self add poetry-bumpversion
+
+**Option 2 — Install per project** (Poetry 2.0+). Pinned in ``pyproject.toml`` so every contributor gets it automatically on ``poetry install``.
+
+.. code:: toml
+
+    [tool.poetry.requires-plugins]
+    poetry-bumpversion = ">=0.3.3"
+
+Then install project dependencies (this also installs the required plugins):
+
+::
+
+    poetry install
 
 ++++++++++++++++++++++++++++++
 Configure version replacements
@@ -56,6 +69,9 @@ you are all set (dry-run does not update any file).
 
     Bumping version from 0.5.0 to 0.5.1
     poetry-bumpversion: processed file: your_package/__init__.py
+
+If a file misses version update, check the console log — a ``skipped file``
+warning will indicate whether the file was not found or the search pattern did not match.
 
 If dry-run output looks fine you can run version update command without dry-run flag to
 check if version in both ``pyproject.toml`` and ``your_package/__init__.py`` file has been updated.
