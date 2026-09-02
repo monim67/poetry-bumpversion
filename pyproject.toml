@@ -75,19 +75,14 @@ source = [
 ]
 
 [tool.tox]
-legacy_tox_ini = """
-[tox]
-envlist = py{314,313,312,311,310}
+requires = ["tox>=4"]
+env_list = ["3.14", "3.13", "3.12", "3.11", "3.10"]
 
-[testenv]
-allowlist_externals =
-    bash
+[tool.tox.env_run_base]
 skip_install = true
-extra_setup_commands =
-    bash tests/install-tox-deps.bash
-commands =
-    pytest
-"""
+allowlist_externals = ["bash"]
+commands_pre = [["bash", "tests/install-tox-deps.bash"]]
+commands = [["pytest"]]
 
 [tool.poe.tasks]
 lint = [

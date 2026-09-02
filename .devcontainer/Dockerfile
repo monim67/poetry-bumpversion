@@ -1,8 +1,6 @@
 FROM python:3.14
 
-RUN pip install "poetry>=2.0"
+COPY --from=ghcr.io/astral-sh/uv:0.12.8 /uv /uvx /usr/local/bin/
+RUN uv python install 3.12 3.11 3.10
 
-RUN curl -fsSL https://pyenv.run | bash
-ENV PYENV_ROOT="/root/.pyenv" PATH="/root/.pyenv/bin:$PATH:/root/.pyenv/shims"
-RUN pyenv install 3.14 3.13 3.10 \
-    && pyenv global 3.14 3.13 3.10
+RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/usr/local python3 -

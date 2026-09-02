@@ -11,6 +11,9 @@
 	],
 	"postCreateCommand": "make -C .devcontainer post-create",
 	"postStartCommand": "poetry sync",
+	"remoteEnv": {
+		"TOX_WORK_DIR": "${containerWorkspaceFolder}/.tox.devcontainer"
+	},
 	"customizations": {
 		"vscode": {
 			"extensions": [

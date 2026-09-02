@@ -26,14 +26,14 @@ validate_poetry_honoring_virtualenvs() {
     fi
 }
 
-validate_which_poetry_resolves_to_tox_env() {
-    EXPECTED_POETRY_PATH="$TOX_ENV_DIR/bin/poetry"
-    if [[ "$(which poetry)" != "$EXPECTED_POETRY_PATH" ]]; then
-        echo "Error: 'which poetry' does not resolve to $EXPECTED_POETRY_PATH"
+validate_which_python_resolves_to_tox_env() {
+    EXPECTED_PYTHON_PATH="$TOX_ENV_DIR/bin/python"
+    if [[ "$(which python)" != "$EXPECTED_PYTHON_PATH" ]]; then
+        echo "Error: 'which python' does not resolve to $EXPECTED_PYTHON_PATH"
         exit 1
     fi
 }
 
 validate_poetry_honoring_virtualenvs
-validate_which_poetry_resolves_to_tox_env
+validate_which_python_resolves_to_tox_env
 install_if_deps_updated

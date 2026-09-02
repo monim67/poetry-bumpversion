@@ -1,6 +1,8 @@
 {
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": false,
+  "python-envs.defaultEnvManager": "ms-python.python:poetry",
+  "python-envs.defaultPackageManager": "ms-python.python:poetry",
   "[python]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "ms-python.black-formatter",
@@ -8,11 +10,5 @@
       "source.fixAll": "always",
       "source.organizeImports": "always",
     }
-  },
-  "restructuredtext.syntaxHighlighting.disabled": true,
-  "esbonio.server.enabled": false,
-  "esbonio.sphinx.confDir": "",
-  "yaml.schemas": {
-    "https://json.schemastore.org/github-workflow.json": "file:///.github/workflows/deploy.yml"
   },
 }
