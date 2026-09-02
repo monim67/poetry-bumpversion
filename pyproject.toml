@@ -8,7 +8,16 @@ requires-python = ">=3.10,<4"
 repository = "https://github.com/monim67/poetry-bumpversion"
 license = "MIT"
 keywords = ["poetry", "bump", "version", "plugin"]
-classifiers = ["Typing :: Typed"]
+classifiers = [
+    "Typing :: Typed",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
 dependencies = [
     "poetry>=2,<3",
     "pydantic>=2"
